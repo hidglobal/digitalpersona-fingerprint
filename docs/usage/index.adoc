@@ -5,14 +5,12 @@ toc::[]
 
 == Overview
 
-As a part of DigitalPersona Access Management API (DPAM), the
-`@digitalpersona/fingerprint` library provides Javascript API allowing to communicate
-with fingerprint readers from web browsers.
+As a part of the DigitalPersona Access Management API (DPAM), the `@digitalpersona/fingerprint` library provides a Javascript API allowing to communicate with fingerprint readers from web browsers.
 
 IMPORTANT: The API is designed to be used in a browser environment only!
 It is not a NodeJS library!
 
-== Installing
+== Installation
 
 ```shell
 > npm install @digitalpersona/fingerprint @digitalpersona/websdk
@@ -20,26 +18,26 @@ It is not a NodeJS library!
 
 Once the package is installed, it can be imported into your browser application.
 
-The `@digitalpersona/fingerprint` provides only a legacy IIFE module.
+The `@digitalpersona/fingerprint` library only provides a legacy IIFE module.
 No modern ESM module is provided.
 
 The IIFE module works in legacy and/or for simple "build-less" applications,
 with no requirements for bundling and dead code elimination. The IIFE module
-must be imported using the HTML `<script>` tag. You may use a CDN like unpkg.com:
+must be imported using the HTML `<script>` tag. You can use a CDN such as unpkg.com:
 `<script src="https://unpkg.com/@digitalpersona/fingerprint/dist/fingerprint.sdk.js">`.
 
 The IIFE module adds a global `Fingerprint.WebApi` property to the `window` object.
-When using bundlers like Rollup, Webpack, etc, the `"Fingerprint.WebApi"` object must be
+When using bundlers such as Rollup and Webpack, the `"Fingerprint.WebApi"` object must be
 added to the list of "globals", and the `"@digitalpersona/fingerprint"` must be added
 to the list of "external" modules, so it will not be bundled into the final
 output.
 
-IMPORTANT: The library has a peer dependecy on the `@digitalpersona/websdk` package,
+IMPORTANT: The library has a peer dependency on the `@digitalpersona/websdk` package,
   which provides a JavaScript interface to the native API.
   Make sure the `@digitalpersona/websdk` is also installed as a runtime dependency
-  into your project. The `@digitalpersona/websdk` is currently available only
+  in your project. The `@digitalpersona/websdk` is currently available only
   as an IIFE module, so you also must import it using a `<script>` tag,
-  and add `"WebSdk"` to the lsit of "globals", and add `"@digitalpersona/websdk"`
+  and add `"WebSdk"` to the list of "globals", and add `"@digitalpersona/websdk"`
   to the list of "external" modules to prevent bundling.
 
 If you are using a vanilla Javascript application, you can add the following
@@ -138,7 +136,7 @@ const api = new Fingerprint.WebApi();
 
 NOTE: The `projects.my-app.architect.build.scripts` property in the `angular.json`
 is the https://angular.dev/reference/configs/workspace-config#build-target[Angular's way]
-to bundle external modules like `@digitalpersona/websdk` and `@digitalpersona/fingerprint`
+to bundle external modules such as `@digitalpersona/websdk` and `@digitalpersona/fingerprint`
 as if they would be loaded with the `<script>` tag.
 
 NOTE: The `/// <reference types="..." />` need to be added avoid TypeScript
@@ -148,12 +146,11 @@ in your `tsconfig.json`, to tell TypeScript to use the modern module resolution 
 
 == Usage
 
-In a typical use case, users navigate to a logon (or fingerprint enrollment) page,
-and there they are presented with a fingerprint logon/enrollment UI. The page either
-starts the fingerprint capture process automatically, or allows the user to start and
-cancel the fingerprint capture process by clicking UI elements like buttons.
+In a typical use case, users navigate to a logon (or fingerprint enrollment) page where they are presented with a fingerprint logon/enrollment UI. The page either
+starts the fingerprint capture process automatically or allows the user to start and
+cancel the fingerprint capture process by clicking UI elements such as buttons.
 
-In your fingerprint signin controller class, create an instance of a `Fingerprint.WebApi`
+In your fingerprint sign-in controller class, create an instance of a `Fingerprint.WebApi`
 class and subscribe to its events:
 
 [separator=¦]
@@ -198,20 +195,20 @@ export class FingerprintSignin
 ----
 |===
 
-The Fingerprint API requires a HID DigitalPersona Agent running on a client machine.
+The Fingerprint API requires an HID DigitalPersona Agent running on a client machine.
 This agent provides a secure communication channel between a browser and a fingerprint
 device driver.
 
-The DigitalPersona Agent is native Windows application which is a part of
-HID DigitalPersona clients, like:
+The DigitalPersona Agent is a native Microsoft Windows application and is a part of
+HID DigitalPersona clients such as:
 
-* HID DigitalPersona Worksation,
+* HID DigitalPersona Workstation
 * HID DIgitalPersona Kiosk
-* HID Authentication Device Client (ADC, former Lite Client).
+* HID Authentication Device Client (ADC, previously Lite Client)
 
-If you expect your users may not have any of HID DigitalPersona clients installed,
-provide them with a https://digitalpersona.hidglobal.com/lite-client/[link
-to the HID ADC download], appearing on a reader communication error:
+If you expect that your users may not have any of the HID DigitalPersona clients installed,
+provide a https://digitalpersona.hidglobal.com/lite-client/[link
+to the HID ADC download] in a reader communication error:
 
 
 [separator=¦]
@@ -247,7 +244,7 @@ class FingerprintSignin
 |===
 
 To start capturing fingerprint data, start listening for fingerprint events
-using the `subscribe()` method; to stop listening, use the `unsibsribe()` method:
+using the `subscribe()` method. To stop listening, use the `unsubscribe()` method:
 
 [separator=¦]
 |===
@@ -316,8 +313,8 @@ class FingerprintSignin {
 
 In addition, using the Fingerprint API, you can:
 
-* Enumerate all fingerprint readers in the system using the `enumerateDevices` method,
-* Get readers' properties like `deviceId`, `name`, `type`, etc using the `getDeviceInfo` method.
+* Enumerate all fingerprint readers in the system using the `enumerateDevices` method.
+* Get readers' properties (such as `deviceId`, `name` and `type`) using the `getDeviceInfo` method.
 * Get fingerprint quality using the `onQualityReported` event handler.
 * Get fingerprint reader status using the `onDeviceConnected` and `onDeviceDisconnected` event handlers.
 * Get fingerprint acquisition status using the `onAcquisitionStarted` and `onAcquisitionStopped` event handlers.
