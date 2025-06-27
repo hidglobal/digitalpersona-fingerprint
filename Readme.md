@@ -1,6 +1,6 @@
 # HID DigitalPersona Fingerprint API
 
-This JavaScript library enables the use fingerprint readers in web browsers, allowing to capture capture fingerprint enrollment or authentication data using a DigitalPersona local device access API.
+This JavaScript library enables the use of fingerprint readers in web browsers, allowing to capture capture fingerprint enrollment or authentication data using a DigitalPersona local device access API.
 
 > [!IMPORTANT]
 > The API is designed to be used in a browser environment only! This is not a NodeJS library!
